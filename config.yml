@@ -1,0 +1,9 @@
+db-params:
+    MONGODB_URI: 'uri'
+    MONGODB_USER: 'user'
+    MONGODB_PASS: 'password'
+    MONGODB_DB: 'test'
+creds:
+    ENV: 'test'
+    TOKEN: 'sdf'
+    WHITE_LIST: ''
