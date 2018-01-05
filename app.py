@@ -2,6 +2,7 @@ import json
 import requests
 import time
 from configuration import get_config
+from logger import logging_handler
 from query_builder import save_query, get_random_tok
 
 TOKEN = get_config('TOKEN')
@@ -83,11 +84,15 @@ def main():
             last_update_id = get_last_update_id(updates) + 1
             if is_voice(updates):
                 chat_id, voice_id = get_last_chat_id_and_text(updates)
+                msg = '{} {}'.format('tok was received from', chat_id)
+                logging_handler(msg)
                 save_query(voice_id)
                 send_message('Tok saved', chat_id)
             else:
                 chat_id = get_last_chat_id_and_text(updates, text=True)
                 voice_id = get_random_tok()
+                msg = '{} {} {}'.format(voice_id, 'tok was sent to', chat_id)
+                logging_handler(msg)
                 send_voice(voice_id, chat_id)
         time.sleep(0.5)
 
