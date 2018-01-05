@@ -1,3 +1,4 @@
+from logger import logging_handler
 import os.path
 import yaml
 
@@ -9,6 +10,7 @@ else:
 
 def get_config(parameter_name):
     if is_heroku:
+        logging_handler(os.environ.get(parameter_name))
         return os.environ.get(parameter_name, 'Theres\'s nothing here')
     else:
         with open("config.yml", 'r') as ymlfile:
@@ -18,6 +20,7 @@ def get_config(parameter_name):
 
 def get_db_creds(parameter_name):
     if is_heroku:
+        logging_handler(os.environ.get(parameter_name))
         return os.environ.get(parameter_name, 'Theres\'s nothing here')
     else:
         with open("config.yml", 'r') as ymlfile:
